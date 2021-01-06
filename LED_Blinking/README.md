@@ -5,8 +5,12 @@ In this project, the GNU toolchain will be used with command line for the compil
 It will be written in C++
 
 
-To do list:
+# To do list:
   1- A breif arm-none-eabi explanation.
   2- makefiles
   
+* [GNU](#GNU)
+
+# <a name="GNU"></a>GNU
+
   
