@@ -23,6 +23,7 @@
 #include "nvic.h"
 #include "dma.h"
 #include "timer.h"
+#include "memcpy.h"
 
 
 /* Private includes ----------------------------------------------------------*/
@@ -83,6 +84,7 @@ int main(void)
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 
   SysTick_Init();
+  SystemClock_Config();
   NVIC_Init();
   DMA2_Stream0_Init();
   DMA2_Stream0_Set_Addresses(srcBuffer, dstBuffer, BUFFER_SIZE);
@@ -97,7 +99,7 @@ int main(void)
   /* USER CODE END Init */
 
   /* Configure the system clock */
-  SystemClock_Config();
+  memcpy32(srcBuffer, dstBuffer, BUFFER_SIZE);
 
   /* USER CODE BEGIN SysInit */
 
@@ -108,6 +110,10 @@ int main(void)
 
   /* USER CODE END 2 */
   __enable_irq();
+
+  Timer1_ResetCounts();
+  Timer1_Start();
+  DMA2_Stream0_Enable();
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */

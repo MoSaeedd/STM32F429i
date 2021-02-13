@@ -21,6 +21,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
+
+
+extern uint32_t time_DMA;
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -192,6 +195,28 @@ void SysTick_Handler(void)
   /* USER CODE END SysTick_IRQn 1 */
 }
 
+
+/**
+  * @brief  This function handles DMA2 Stream0 interrupt request.
+  * @param  None
+  * @retval None
+  */
+void DMA2_Stream0_IRQHandler(void)
+{
+  /* Check transfer complete flag */
+  if(DMA_LISR_TCIF0 == (DMA_LISR_TCIF0 & DMA2->LISR))
+  {
+    /* DMA transfer is complete, turn off green LED */
+	  time_DMA = Timer1_GetCount();
+	  Timer1_Stop();
+    /* Clear transfer complete flag */
+    DMA2->LIFCR = DMA_LIFCR_CTCIF0;
+  }
+  else
+  {
+    /* Turn on red LED, this interrupt is not handled */
+  }
+}
 /******************************************************************************/
 /* STM32F4xx Peripheral Interrupt Handlers                                    */
 /* Add here the Interrupt Handlers for the used peripherals.                  */

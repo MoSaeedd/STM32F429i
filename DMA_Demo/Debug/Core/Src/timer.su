@@ -1,0 +1,5 @@
+timer.c:11:6:Timer1_InitCounterMode	4	static
+timer.c:26:6:Timer1_Start	4	static
+timer.c:34:6:Timer1_Stop	4	static
+timer.c:43:10:Timer1_GetCount	4	static
+timer.c:49:6:Timer1_ResetCounts	4	static
